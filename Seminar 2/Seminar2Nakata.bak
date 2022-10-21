@@ -62,3 +62,15 @@
   (define(reverse-i rev n)
     (if(zero? n) rev (reverse-i (+ (remainder n 10) (* rev 10)) (quotient n 10))))
   (reverse-i 0 n))
+
+; 8. За дадени цели числа x и n връща x^n,
+; но ако n е четно, то x^n = (x^(n/2))^2
+; Реализирайте я чрез линейна рекурсия (итерация).
+(define (fast-pow x n)
+  (define (step current-step result n)
+    (if(> n current step) result (if(even? current-step) (step (* current-step 2)))
+  (step 0 1 n))
+;x = 5
+; n = 0 - 1
+; n = 2 ->
+; n = 4 -> 
