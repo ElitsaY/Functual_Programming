@@ -67,4 +67,3 @@
 ;проверява дали число е просто
 (define (isPrime? n) (if(= (next n) (divisors-sum n)) #t #f))
 
-;Да се напише функцията от по-висок ред (repeat n f), използвайки accumulate
