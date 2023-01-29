@@ -78,14 +78,22 @@ path1 graph1 a b
             Nothing -> False
             Just children -> any (\c -> path1 graph1 c b) children
 
+grcyc::Graph1 Int
+grcyc =
+  [ GNode 1 [2, 3],
+    GNode 2 [4],
+    GNode 3 [],
+    GNode 4 [1, 5],
+    GNode 5 []
+  ]
 
 findPath :: Eq a => Graph1 a -> a -> a ->[a]-> Bool
 findPath gr parent node currPath 
     | parent == node = True
     | otherwise = 
         not (null notOccured) && any (\c -> findPath gr c node (currPath ++ [c]) ) notOccured 
-            where notOccured =  filter (\x -> x `notElem` currPath) children
-                    where children = adjacents $ head [ v | v <-gr, value v == parent]
+            where notOccured =  filter (\x -> x `notElem` currPath) $ head [ adjacents v | v <-gr, value v == parent]
+                  --children =  head [ adjacents v | v <-gr, value v == parent]
 
 dfs :: Eq a => Graph1 a -> a -> a -> Bool
 dfs gr parent node = findPath gr parent node [parent]
